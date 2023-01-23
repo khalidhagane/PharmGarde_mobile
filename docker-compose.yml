@@ -1,0 +1,42 @@
+version: "3"
+services:
+    server:
+        build: ./server
+        container_name: server_container
+        ports:
+            - 5000:5000
+        networks:
+            - pharmgarde-net
+        volumes:
+            - ./server:/server
+
+    frontend:
+        build: ./frontend
+        container_name: frontend_container
+        ports:
+            - 3000:3000
+        networks:
+            - pharmgarde-net
+        depends_on:
+            - server
+        volumes:
+            - ./frontend:/frontend
+
+    # mongodb:
+    #     image: mongo
+    #     container_name: mongodb_container
+    #     ports:
+    #         - 27018:27017
+
+    #     networks:
+    #         - pharmgarde-net
+    #     volumes:
+    #         - mongodb-data:/data/db
+
+networks:
+    pharmgarde-net:
+        driver: bridge
+
+volumes:
+    mongodb-data:
+        driver: local
