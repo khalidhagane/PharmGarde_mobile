@@ -7,7 +7,7 @@ const {
     getPharmacy,
     deletePharmacy
 } = require("../controllers/pharmacyController")
-const { getOnePharmacy } = require("../middlwares/pharmacy")
+const { getOnePharmacy } = require("../middlewares/pharmacy")
 
 router.post("/", createPharmacy)
 router.get("/:pharmacy_id", getPharmacy)
