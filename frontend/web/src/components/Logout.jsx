@@ -3,7 +3,7 @@ import React from 'react'
 function Logout() {
   return (
     <>
-    <button>Logout</button></>
+    <button className='text-[#00337C] font-bold text-base lg:text-lg'>Logout</button></>
   )
 }
 

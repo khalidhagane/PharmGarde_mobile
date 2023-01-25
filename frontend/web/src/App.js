@@ -3,7 +3,7 @@ import './App.css';
 import Layout from './pages/Layout';
 import Login from './pages/Login';
 import Dashboard from './components/Dashboard'
-import Comments from './components/Comments';
+import Comments from './components/CommentContainer';
 import Settings from './components/Settings';
 import Pharmacy from './components/Pharmacy';
 
