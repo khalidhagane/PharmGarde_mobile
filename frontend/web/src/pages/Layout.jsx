@@ -16,7 +16,7 @@ function Layout() {
 
                         <div className="flex  rounded-b-3xl  space-y-5 flex-col items-center py-7">
                             <img className="h-28 w-28 rounded-full" src={Ryad} alt="User" />
-                            <p> <span className="h1 mb-11 py-4 font-bold text-white">ABDELAZIIIIZ</span></p>
+                            <p> <span className="h1   font-bold text-[#0081C9]">ABDELAZIIIIZ</span></p>
                         </div>
 
 
