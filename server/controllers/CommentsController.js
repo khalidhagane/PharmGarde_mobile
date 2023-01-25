@@ -35,4 +35,19 @@ const deleteComment = async (req, res) => {
     }
 }
 
-module.exports = {createComment , deleteComment}
+// @desc GET ALL Comment for a Pharmacy BY ID :
+// @route GET http://localhost:5000/api/comment/:id
+// @access PRIVATE
+
+const getCommentPharmacy = async (req,res) => {
+    const CommentsPharmacy = await Comment.find({id_Pharmacy :req.params.id})
+    if(CommentsPharmacy){
+        res.status(200)
+        .json(CommentsPharmacy)
+    } else {
+        res.status(400)
+        .json({message: "No comments Founded !"})
+    }
+}
+
+module.exports = {createComment , deleteComment , getCommentPharmacy}
