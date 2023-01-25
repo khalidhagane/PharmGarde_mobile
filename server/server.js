@@ -1,6 +1,7 @@
 require('dotenv').config()
 const dbConnect = require('./config/config')
 const express = require('express')
+const errorHandler = require('./middlwares/errorHandler')
 
 dbConnect()
 
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use('/api/pharmacy', pharmacyRouter)
 app.use('/api/review', reviewRouter)
 app.use('/api/comment' , commentRouter)
+
+app.use(errorHandler)
 
 app.listen(process.env.PORT, () => console.log('Server running on port 5000') )
 
