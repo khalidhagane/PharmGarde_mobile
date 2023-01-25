@@ -7,8 +7,8 @@ const {
 } = require("../controllers/ReviewController")
 
 router.post('/:id' ,createReview)
-router.get('/review:id',getAllReviewsByPharmacyID)
+router.get('/:id',getAllReviewsByPharmacyID)
 
 
 
-module.exports = router
+module.exports = router;
