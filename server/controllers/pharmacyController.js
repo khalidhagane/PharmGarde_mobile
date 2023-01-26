@@ -1,4 +1,6 @@
 const Pharmacy = require("../models/Pharmacy")
+const Comment = require("../models/Comments")
+const Review = require("../models/Review")
 const ErrorResponse = require("../utils/errorResponse")
 const { validationResult } = require("express-validator/check")
 
@@ -107,8 +109,31 @@ const getPharmacy = async (req, res) => {
     }
 }
 
-const deletePharmacy = (req, res) => {
-    res.send("working!")
+/**
+    @desc DELETE Single Pharmacy BY ID :
+    @route DELETE http://localhost:5000/api/pharmacy/:pharmacy_id
+    @access Private[Admin]
+*/
+const deletePharmacy = async (req, res) => {
+    try {
+        const deletePharmacy = await Pharmacy.deleteOne({
+            _id: req.pharmacy._id,
+        })
+
+        if (deletePharmacy.deletedCount === 0)
+            return res
+                .status(400)
+                .json({ message: "Pharmacy can'not be deleted !" })
+
+        await Comment.deleteMany({ id_Pharmacy: req.pharmacy._id })
+
+        await Review.deleteMany({ id_Pharmacy: req.pharmacy._id })
+
+        res.status(200).json({ message: "Pharmacy Deleted Succefully !" })
+    } catch (error) {
+        console.log(error)
+        next(new ErrorResponse(error, 400))
+    }
 }
 
 module.exports = {
