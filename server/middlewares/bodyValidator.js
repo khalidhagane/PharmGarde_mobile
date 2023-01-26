@@ -17,6 +17,19 @@ const validate = (method) => {
                     .withMessage("Comment must be a string"),
             ]
         }
+        case "pharmacy": {
+            return [
+                body("name").exists().withMessage("Name is required"),
+                body("address").exists().withMessage("Address is required"),
+                body("phoneNumber")
+                    .exists()
+                    .withMessage("Phone Number is required"),
+                body("startTime")
+                    .exists()
+                    .withMessage("Start Time is required"),
+                body("endTime").exists().withMessage("End Time is required"),
+            ]
+        }
     }
 }
 
