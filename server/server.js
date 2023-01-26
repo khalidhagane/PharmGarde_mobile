@@ -21,3 +21,6 @@ app.use("/api/comment", commentRouter)
 app.use(errorHandler)
 
 app.listen(process.env.PORT, () => console.log("Server running on port 5000"))
+
+
+module.exports = app;
