@@ -11,14 +11,14 @@ const app = express()
 const pharmacyRouter = require('./routes/pharmacy')
 const reviewRouter = require('./routes/ReviewRouters')
 const commentRouter = require('./routes/CommentRouters')
-const searchRouter = require('./routes/searchRouters')
+// const searchRouter = require('./routes/searchRouters')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api/pharmacy', pharmacyRouter)
 app.use('/api/review', reviewRouter)
 app.use('/api/comment' , commentRouter)
-app.use('/api/search' , searchRouter)
+// app.use('/api/search' , searchRouter)
 
 app.use(errorHandler)
 
