@@ -1,7 +1,6 @@
 const Pharmacy = require("../models/Pharmacy")
 const ErrorResponse = require("../utils/errorResponse")
 const { validationResult } = require("express-validator/check")
-const { log } = require("console")
 
 /**
     @desc POST Single Pharmacy :
