@@ -1,6 +1,3 @@
-const Pharmacy = require('../models/Pharmacy');
-const createPharmacy = (req, res) => {
-    res.send('working!')
 const Pharmacy = require("../models/Pharmacy")
 const ErrorResponse = require("../utils/errorResponse")
 const { validationResult } = require("express-validator/check")
@@ -94,4 +91,4 @@ module.exports = {
     deletePharmacy,
     searchPharmacy,
 }
-}
+
