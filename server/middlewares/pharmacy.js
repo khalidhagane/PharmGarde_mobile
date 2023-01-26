@@ -6,7 +6,6 @@ const getOnePharmacy = async (req, res, next, pharmacy_id) => {
         req.pharmacy = pharmacy
         next()
     } catch (err) {
-        console.log(err)
         return res.status(404).json({
             error: "Pharmacy not found",
         })

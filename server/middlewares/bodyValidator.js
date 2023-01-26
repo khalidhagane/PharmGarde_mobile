@@ -30,11 +30,11 @@ const validate = (method) => {
                 body("endTime").exists().withMessage("End Time is required"),
             ]
         }
-        // case "search":{
-        //     return [
-        //         param('key').exists().withMessage("Search keyword is required")
-        //     ]
-        // }
+        case "search":{
+            return [
+                param('key').exists().withMessage("Search keyword is required")
+            ]
+        }
     }
 }
 
