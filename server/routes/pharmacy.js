@@ -19,8 +19,8 @@ router.post("/", upload.single("image"), validate("pharmacy"), createPharmacy)
 router.get("/:pharmacy_id", getPharmacy)
 router.put(
     "/:pharmacy_id",
-    validate("pharmacy"),
     upload.single("image"),
+    validate("pharmacy"),
     updatePharmacy
 )
 router.get("/", getPharmacies)
