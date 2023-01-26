@@ -19,33 +19,33 @@ const deletePharmacy = (req, res) => {
     res.send('working!')
 }
 
-// const getAllPharmacy = async (req, res, next) => {
-//     // const id = req.params.id;
-//     const AllPharmacy = await Pharmacy.find()
-//     console.log('AllPharmacy',AllPharmacy)
-//     if(AllPharmacy){
-//         res.status(200)
-//         .json(AllPharmacy)
-//     } else {
-//         res.status(400)
-//         .json({message: "No pharmacy "})
-//     }
-// }
 
-const searchPharmacy = async(req , res) =>{
+const searchPharmacy = async(req , res , next) =>{
     // await res.send("search done")
     // console.log(req.params.key);
-    const data = await Pharmacy.find(
+    try {
+        const data = await Pharmacy.find(
         {
             "$or":[
                 {name:{$regex:req.params.key}}
             ]
-
         }
     )
-    res.send(data)
-    // console.log('AllPharmacy',AllPharmacy)
-    // await res.send
+
+    if(data.length == 0){
+        return res.status(404)
+        .send(`no record matche's ${req.params.key}`)
+    }
+
+        res
+        .status(200)
+        .send(data)
+
+    } catch (error) {
+        res
+        .status(400)
+        .send(error)
+    }
 
 }
 
@@ -56,5 +56,4 @@ module.exports = {
     getPharmacy,
     deletePharmacy,
     searchPharmacy,
-    // getAllPharmacy
 }
