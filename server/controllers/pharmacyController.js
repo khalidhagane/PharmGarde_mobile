@@ -76,12 +76,35 @@ const updatePharmacy = async (req, res) => {
     }
 }
 
-const getPharmacies = (req, res) => {
-    res.send("working!")
+/**
+    @desc GET ALL Pharmacies :
+    @route GET http://localhost:5000/api/pharmacy
+    @access Public
+*/
+const getPharmacies = async (req, res) => {
+    try {
+        const pharmacies = await Pharmacy.find()
+        res.status(200).json({ pharmacies })
+    } catch (error) {
+        console.log(error)
+        next(new ErrorResponse(error, 400))
+    }
 }
 
-const getPharmacy = (req, res) => {
-    res.send("working!")
+/**
+    @desc GET Single Pharmacy BY ID :
+    @route GET http://localhost:5000/api/pharmacy/:pharmacy_id
+    @access Public
+*/
+
+const getPharmacy = async (req, res) => {
+    try {
+        const pharmacy = await req.pharmacy
+        res.status(200).json({ pharmacy })
+    } catch (error) {
+        console.log(error)
+        next(new ErrorResponse(error, 400))
+    }
 }
 
 const deletePharmacy = (req, res) => {
