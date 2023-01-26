@@ -26,4 +26,5 @@ router.delete("/:pharmacy_id", deletePharmacy)
 
 router.param("pharmacy_id", getOnePharmacy)
 
+
 module.exports = router

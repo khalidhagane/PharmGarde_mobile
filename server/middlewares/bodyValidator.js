@@ -1,4 +1,4 @@
-const { body } = require("express-validator/check")
+const { body , param } = require("express-validator/check")
 
 const validate = (method) => {
     switch (method) {
@@ -30,6 +30,11 @@ const validate = (method) => {
                 body("endTime").exists().withMessage("End Time is required"),
             ]
         }
+        // case "search":{
+        //     return [
+        //         param('key').exists().withMessage("Search keyword is required")
+        //     ]
+        // }
     }
 }
 

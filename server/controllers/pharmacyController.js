@@ -1,6 +1,3 @@
-const Pharmacy = require('../models/Pharmacy');
-const createPharmacy = (req, res) => {
-    res.send('working!')
 const Pharmacy = require("../models/Pharmacy")
 const ErrorResponse = require("../utils/errorResponse")
 const { validationResult } = require("express-validator/check")
@@ -69,10 +66,10 @@ const searchPharmacy = async(req , res , next) =>{
         }
     )
 
-    if(data.length == 0){
+    if(data.length == 0)
         return res.status(404)
         .send(`no record matche's ${req.params.key}`)
-    }
+    
 
         res
         .status(200)
@@ -93,5 +90,4 @@ module.exports = {
     getPharmacy,
     deletePharmacy,
     searchPharmacy,
-}
 }
