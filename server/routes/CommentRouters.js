@@ -1,10 +1,20 @@
-const express = require('express');
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
-const {createComment} = require('../controllers/CommentsController')
+const {
+    createComment,
+    deleteComment,
+    getCommentPharmacy,
+} = require("../controllers/CommentsController")
 
+const { validate } = require("../middlewares/bodyValidator")
 
-router.post('/:id', createComment);
+const { getOnePharmacy } = require("../middlewares/pharmacy")
 
+router.post("/:pharmacy_id", validate("createComment"), createComment)
+router.delete("/:pharmacy_id", deleteComment)
+router.get("/:pharmacy_id", getCommentPharmacy)
 
-module.exports = router;
+router.param("pharmacy_id", getOnePharmacy)
+
+module.exports = router
