@@ -14,7 +14,7 @@ const { validate } = require("../middlewares/bodyValidator")
 
 const upload = require("../middlewares/uploadImage")
 
-router.get("/search/:key", validate("search"), searchPharmacy)
+router.get("/search/:key", searchPharmacy)
 router.post("/", upload.single("image"), validate("pharmacy"), createPharmacy)
 router.get("/:pharmacy_id", getPharmacy)
 router.put(
