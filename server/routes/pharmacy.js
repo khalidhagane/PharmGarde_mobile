@@ -5,13 +5,24 @@ const {
     updatePharmacy,
     getPharmacies,
     getPharmacy,
-    deletePharmacy
+    deletePharmacy,
+    searchPharmacy
 } = require("../controllers/pharmacyController")
-const { getOnePharmacy } = require("../middlwares/pharmacy")
+const { getOnePharmacy } = require("../middlewares/pharmacy")
 
-router.post("/", createPharmacy)
+const { validate } = require("../middlewares/bodyValidator")
+
+const upload = require("../middlewares/uploadImage")
+
+router.get("/search/:key", validate("search"), searchPharmacy)
+router.post("/", upload.single("image"), validate("pharmacy"), createPharmacy)
 router.get("/:pharmacy_id", getPharmacy)
-router.put("/:pharmacy_id", updatePharmacy)
+router.put(
+    "/:pharmacy_id",
+    upload.single("image"),
+    validate("pharmacy"),
+    updatePharmacy
+)
 router.get("/", getPharmacies)
 router.delete("/:pharmacy_id", deletePharmacy)
 

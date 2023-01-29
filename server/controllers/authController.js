@@ -57,6 +57,7 @@ exports.login = async (req, res) => {
                 jwtConfig.secret
             );
             res.cookie('jwt', token, { httpOnly: true });
+            // res.cookie('csrfToken', token, { httpOnly: true }')
             res.status(200).send({
                 success: true,
                 token: token,
