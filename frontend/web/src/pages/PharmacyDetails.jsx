@@ -1,4 +1,27 @@
+import { useEffect, useState } from "react"
+import api from "../helpers/api"
+import { useParams } from "react-router-dom"
+
 function PharmacyDetails() {
+    const [pharmacy, setPharmacy] = useState([])
+    const [loading, setLoading] = useState(true)
+    const { id } = useParams()
+
+    const getPharmacy = async () => {
+        const response = await api.get(`/pharmacy/${id}`)
+        setPharmacy(response.data)
+        console.log(response.data)
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        getPharmacy()
+    }, [])
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
     return (
         <>
             <div className="flex justify-between">
@@ -17,14 +40,14 @@ function PharmacyDetails() {
                         </a>
                         <div className="p-6 text-center">
                             <h5 className="text-gray-900 text-xl font-medium mb-2">
-                                Pharmacy Name
+                                {pharmacy.pharmacy.name}
                             </h5>
                             <p className="flex justify-center">
                                 <span className="text-gray-600 text-sm">
                                     address:
                                 </span>
                                 <span className="text-gray-900 text-sm">
-                                    hxdfgdsjfgsdfhjggh
+                                    {pharmacy.pharmacy.address}
                                 </span>
                             </p>
                             <p className="flex justify-center">
@@ -32,7 +55,7 @@ function PharmacyDetails() {
                                     phone:
                                 </span>
                                 <span className="text-gray-900 text-sm">
-                                    123456789
+                                    {pharmacy.pharmacy.phoneNumber}
                                 </span>
                             </p>
                             <p className="flex justify-center">
@@ -40,7 +63,7 @@ function PharmacyDetails() {
                                     start time:
                                 </span>
                                 <span className="text-gray-900 text-sm">
-                                    12:00
+                                    {pharmacy.pharmacy.startTime}
                                 </span>
                             </p>
                             <p className="flex justify-center">
@@ -48,7 +71,7 @@ function PharmacyDetails() {
                                     end time:
                                 </span>
                                 <span className="text-gray-900 text-sm">
-                                    12:00
+                                    {pharmacy.pharmacy.endTime}
                                 </span>
                             </p>
                             <div className="flex justify-between">
