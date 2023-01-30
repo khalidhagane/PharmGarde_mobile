@@ -67,6 +67,28 @@ exports.login = async (req, res) => {
 
 }
 
+// @route   GET api/auth/google/success
+// @desc    Google auth success
+// @access  Public
+exports.googleAuthSuccess = async (req, res) => {
+    console.log('googleAuthSuccess :>> ' );
+    const payload = {
+        id: req.user.id,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //7 days
+    };
+    const token = jwt.sign(
+        JSON.stringify(payload),
+        jwtConfig.secret
+    );
+    res.cookie('jwt', token, { httpOnly: true });
+    // redirect to frontend
+    res.redirect('http://localhost:3000/home')
+    res.status(200).send({
+        success: true,
+        token: token,
+    });
+}
+
 
 
 

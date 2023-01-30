@@ -1,6 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('./localStrategy')
 const JwtStrategy = require('./JwtStrategy')
+const GoogleStrategy = require('./GoogleStrategy')
 // const GoogleStratgey = require('./googleStrategy')
 const User = require('../models/User')
 
@@ -30,6 +31,7 @@ passport.deserializeUser((id, done) => {
 
 // ==== Register Strategies ====
 passport.use(JwtStrategy)
+passport.use(GoogleStrategy)
 passport.use(LocalStrategy)
 // passport.use(GoogleStratgey)
 

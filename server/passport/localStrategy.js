@@ -23,7 +23,7 @@ const strategy = new LocalStrategy (
                 console.log('password :>> ' );
                 return done(null, false, { message: 'Incorrect password' })
             }
-            console.log('done :>> ' );
+            console.log('done :>> ' , User);
 			return done(null, User)
 		})
 

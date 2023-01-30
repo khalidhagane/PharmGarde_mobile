@@ -13,7 +13,7 @@ const { validationResult ,
  var LocalStrategy = require('passport-local');
 
 
-const { register, login } = require("../controllers/authController")
+const { register, login , googleAuthSuccess } = require("../controllers/authController")
 
 router.post("/register",
     [
@@ -25,11 +25,27 @@ router.post("/register",
     register )
 
 router.post("/login", passport.authenticate('local') , login)
-// router.get("/profile", auth.authenticate())
-router.post('/profile', passport.authenticate('jwt', { session: false }),
-    function(req, res) {
-        res.send(req.user);
+router.get("/logout", (req, res) => {
+    res.clearCookie('jwt');
+    res.status(200).json({msg: 'User logged out successfully'})
+})
+router.get('/profile',
+ passport.authenticate('jwt', { session: false }) ,
+  (req, res) => {
+    console.log('===== user!!======')
+    console.log(req.user)
+    const { user } = req;
+    return res.json({ user });
+});
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' , session: false }) ,
+    googleAuthSuccess);
+router.get('/callback/success' , 
+    (req, res) => {
+        res.redirect('http://localhost:3000/login')
     }
-);
+         );
+
+
 
 module.exports = router  
