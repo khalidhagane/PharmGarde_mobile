@@ -13,7 +13,7 @@ var JwtStrategy = require('passport-jwt').Strategy,
     
         if (req && req.cookies) {
             jwt = req.cookies['jwt']
-        }
+        } 
     
         return jwt
     }
