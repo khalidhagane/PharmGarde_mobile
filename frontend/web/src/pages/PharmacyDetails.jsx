@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import api from "../helpers/api"
 import { useParams } from "react-router-dom"
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { Link , useNavigate } from "react-router-dom"
+import './stylePharmacyCommentsAndReviews.css'
+
+
 
 function PharmacyDetails() {
     const [pharmacy, setPharmacy] = useState([])
@@ -16,8 +18,22 @@ function PharmacyDetails() {
         setLoading(false)
     }
 
+
+    const [comments , setComments] = useState([])
+    const [loadingComments , setLoadingComments] = useState(true)
+
+    const getComments = async () => {
+        const response = await api.get(`/comment/${id}`)
+        console.log(response.data);
+        setComments(response.data)
+        setLoadingComments(false)
+    }
+
+   
+
     useEffect(() => {
         getPharmacy()
+        getComments()
     }, [])
 
     // read image from pharmacy state and display it using blob
@@ -45,6 +61,9 @@ function PharmacyDetails() {
     }
 
     if (loading) {
+        return <div>Loading...</div>
+    }
+    if (loadingComments) {
         return <div>Loading...</div>
     }
 
@@ -120,7 +139,21 @@ function PharmacyDetails() {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center">test</div>
+                <div className="flex justify-center">
+                
+<article className="flex content my-5 rounded-lg bg-white transition hover:shadow-xl">
+  <div className="flex flex-1 flex-col justify-between">
+    <img src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="" />
+    {comments.map((comment,i) => 
+    <div className="border-l border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">  
+      <p className="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3" key={i}>
+        {comment.comment}
+      </p>
+    </div>
+    )}
+  </div>
+</article>
+</div>
             </div>
         </>
     )
