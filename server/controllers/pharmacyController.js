@@ -44,7 +44,7 @@ const createPharmacy = (req, res, next) => {
     @route PUT http://localhost:5000/api/pharmacy/:pharmacy_id
     @access Private[Admin]
 */
-const updatePharmacy = async (req, res) => {
+const updatePharmacy = async (req, res, next) => {
     const errors = validationResult(req)
 
     try {
@@ -54,7 +54,7 @@ const updatePharmacy = async (req, res) => {
         const { name, address, phoneNumber, startTime, endTime } = req.body
 
         const pharmacy = await Pharmacy.updateOne(
-            { _id: req.pharmacy.pharmacy_id },
+            { _id: req.pharmacy._id },
             {
                 $set: {
                     name,
@@ -67,9 +67,13 @@ const updatePharmacy = async (req, res) => {
                         contentType: req.file.mimetype,
                     },
                 },
-            },
-            { new: true, runValidators: true }
+            }
         )
+
+        if (pharmacy.modifiedCount === 0)
+            return res
+                .status(400)
+                .json({ message: "Pharmacy can'not be updated !" })
 
         res.status(200).json({ message: "Pharmacy Updated Succefully !" })
     } catch (error) {
