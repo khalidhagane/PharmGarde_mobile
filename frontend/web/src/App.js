@@ -7,6 +7,8 @@ import Comments from "./components/CommentContainer"
 import Settings from "./components/Settings"
 import Pharmacy from "./components/Pharmacy"
 import PharmacyDetails from "./pages/PharmacyDetails"
+import CreatePharmacy from "./pages/CreatePharmacy"
+import UpdatePharmacy from "./pages/UpdatePharmacy"
 
 function App() {
     return (
@@ -17,6 +19,14 @@ function App() {
                     <Route path="/Home" element={<Dashboard />} />
                     <Route path="/Pharmacy" element={<Pharmacy />} />
                     <Route path="/Pharmacy/:id" element={<PharmacyDetails />} />
+                    <Route
+                        path="Pharmacy/create"
+                        element={<CreatePharmacy />}
+                    />
+                    <Route
+                        path="Pharmacy/edit/:id"
+                        element={<UpdatePharmacy />}
+                    />
                     <Route path="/Comments" element={<Comments />} />
                     <Route path="/Settings" element={<Settings />} />
                 </Route>

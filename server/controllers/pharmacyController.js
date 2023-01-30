@@ -44,7 +44,7 @@ const createPharmacy = (req, res, next) => {
     @route PUT http://localhost:5000/api/pharmacy/:pharmacy_id
     @access Private[Admin]
 */
-const updatePharmacy = async (req, res) => {
+const updatePharmacy = async (req, res, next) => {
     const errors = validationResult(req)
 
     try {
@@ -54,7 +54,7 @@ const updatePharmacy = async (req, res) => {
         const { name, address, phoneNumber, startTime, endTime } = req.body
 
         const pharmacy = await Pharmacy.updateOne(
-            { _id: req.pharmacy.pharmacy_id },
+            { _id: req.pharmacy._id },
             {
                 $set: {
                     name,
@@ -67,9 +67,13 @@ const updatePharmacy = async (req, res) => {
                         contentType: req.file.mimetype,
                     },
                 },
-            },
-            { new: true, runValidators: true }
+            }
         )
+
+        if (pharmacy.modifiedCount === 0)
+            return res
+                .status(400)
+                .json({ message: "Pharmacy can'not be updated !" })
 
         res.status(200).json({ message: "Pharmacy Updated Succefully !" })
     } catch (error) {
@@ -86,7 +90,7 @@ const updatePharmacy = async (req, res) => {
 const getPharmacies = async (req, res) => {
     try {
         const pharmacies = await Pharmacy.find()
-        res.status(200).json({ pharmacies })
+        res.status(200).send(pharmacies)
     } catch (error) {
         console.log(error)
         next(new ErrorResponse(error, 400))
@@ -136,32 +140,19 @@ const deletePharmacy = async (req, res) => {
     }
 }
 
-
-const searchPharmacy = async(req , res , next) =>{
-   
+const searchPharmacy = async (req, res, next) => {
     try {
-        const data = await Pharmacy.find(
-        {
-            "$or":[
-                {name:{$regex:req.params.key}}
-            ]
-        }
-    )
+        const data = await Pharmacy.find({
+            $or: [{ name: { $regex: req.params.key } }],
+        })
 
-    if(data.length == 0)
-        return res.status(404)
-        .send(`no record matche's ${req.params.key}`)
-    
-        res
-        .status(200)
-        .send(data)
+        if (data.length == 0)
+            return res.status(404).send(`no record matche's ${req.params.key}`)
 
+        res.status(200).send(data)
     } catch (error) {
-        res
-        .status(400)
-        .send(error)
+        res.status(400).send(error)
     }
-
 }
 
 module.exports = {
@@ -172,4 +163,3 @@ module.exports = {
     deletePharmacy,
     searchPharmacy,
 }
-
