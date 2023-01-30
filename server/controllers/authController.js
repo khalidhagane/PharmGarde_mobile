@@ -22,7 +22,6 @@ exports.register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         // create a new user
-        console.log(' :>>dddd ' );
         const user = new User({
             name,
             email,
@@ -33,7 +32,6 @@ exports.register = async (req, res) => {
  
         res.status(200).json({msg: 'User registered successfully'})
     } catch (error) {
-        console.log(error);
         res.status(500).send('Server error');
     }
 }
@@ -43,10 +41,8 @@ exports.register = async (req, res) => {
 // @access  Public
 exports.login = async (req, res) => {
     
-    console.log('========= login ======== ' );
     User.findOne({ 'email': req.body.email }, (err, user) => {
         if (err) {
-            console.log("Error Happened In auth /token Route");
           } else {
             const payload = {
                 id: user.id,
@@ -71,7 +67,6 @@ exports.login = async (req, res) => {
 // @desc    Google auth success
 // @access  Public
 exports.googleAuthSuccess = async (req, res) => {
-    console.log('googleAuthSuccess :>> ' );
     const payload = {
         id: req.user.id,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //7 days

@@ -131,13 +131,13 @@ function Login() {
               Sign in
             </button>
           </form>
-          <GoogleButton
+          {/* <GoogleButton
                 onClick={() => { 
                   // redirect to google login
                   window.location.href = 'http://localhost:5000/api/auth/google'
                   
                 }}
-            />
+            /> */}
         </div>
       </div>
     </div>

@@ -11,19 +11,11 @@ const createError = require('http-errors');
 const path = require('path');
 const localStrategy = require("passport-local");
 const bodyParser = require("body-parser");
-// const auth = require('./middlwares/authMiddleware')
 const User = require("./models/User");
 const MongoStore = require('connect-mongo')
 const app = express()
 const cors = require('cors')
 
-app.use(cors(
-    {   
-        origin: 'http://localhost:3000',
-        credentials: true,
-        methods: ['GET', 'POST', 'PUT', 'DELETE' , 'OPTIONS'],
-    }
-))
 
 dbConnect() 
 app.locals.pluralize = require('pluralize');
@@ -35,36 +27,19 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 const errorHandler = require('./middlewares/errorHandler')
 
-
-    // var csrfProtection = csrf(
-    //     { cookie: true }
-    // )
-    // app.use(csrf({ cookie: true,
-    //     httpOnly: true,
-    //     secure: true,
-    //     sameSite: 'strict' }))
-    // app.get('/form', function (req, res) {
-    //     res.cookie(
-    //         'XSRF-TOKEN',
-    //         req.csrfToken(),
-    //         { httpOnly: true,
-    //             secure: true,
-    //             // sameSite: 'strict'
-    //          }
-    //     )
-    //     res.send({csrfToken: req.csrfToken() })
-    //     // res.render('index')
-    //   })
+app.use(cors(
+    {   
+        origin: 'http://localhost:3000',
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE' , 'OPTIONS'],
+    }
+))
 
     app.post('/process', function (req, res) {
         res.send('data is being processed')
       })
 
 
-//   app.use(function(req, res, next) {
-//     res.locals.csrfToken = req.csrfToken();
-//     next(); 
-//   });
 app.use( session({
     secret: process.env.SESSION_SECRET,
     resave: false,

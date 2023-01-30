@@ -1,12 +1,12 @@
-import axios from 'axios'
+import axios from '../../lib/axios'
 
-const API_URL = 'http://localhost:5000/api/auth/'
+// const API_URL = 'http://localhost:5000/api/auth/'
 
 // Register user
 const register = async (userData) => {
   alert('register axios before')
   console.log('userData :>> ', userData);
-  const response = await axios.post(API_URL, userData)
+  const response = await axios.post('/api/auth/register', userData)
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
@@ -18,10 +18,7 @@ const register = async (userData) => {
 // Login user
 const login = async (userData) => {
   console.log('user data: ', userData)
-  const response = await axios.post(API_URL + 'login', userData)
-  // console.log('response data: ', response)
-  // alert('login axios before')
-
+  const response = await axios.post( '/api/auth/login', userData)
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
   }
@@ -32,7 +29,7 @@ const login = async (userData) => {
 // Logout user
 const logout = () => {
   localStorage.removeItem('user')
-  const response = axios.post(API_URL + 'logout')
+  const response = axios.post('/api/auth/logout')
   return response.data
 }
 
