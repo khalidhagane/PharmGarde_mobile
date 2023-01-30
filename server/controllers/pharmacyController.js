@@ -86,7 +86,7 @@ const updatePharmacy = async (req, res) => {
 const getPharmacies = async (req, res) => {
     try {
         const pharmacies = await Pharmacy.find()
-        res.status(200).json({ pharmacies })
+        res.status(200).send(pharmacies)
     } catch (error) {
         console.log(error)
         next(new ErrorResponse(error, 400))
@@ -136,32 +136,19 @@ const deletePharmacy = async (req, res) => {
     }
 }
 
-
-const searchPharmacy = async(req , res , next) =>{
-   
+const searchPharmacy = async (req, res, next) => {
     try {
-        const data = await Pharmacy.find(
-        {
-            "$or":[
-                {name:{$regex:req.params.key}}
-            ]
-        }
-    )
+        const data = await Pharmacy.find({
+            $or: [{ name: { $regex: req.params.key } }],
+        })
 
-    if(data.length == 0)
-        return res.status(404)
-        .send(`no record matche's ${req.params.key}`)
-    
-        res
-        .status(200)
-        .send(data)
+        if (data.length == 0)
+            return res.status(404).send(`no record matche's ${req.params.key}`)
 
+        res.status(200).send(data)
     } catch (error) {
-        res
-        .status(400)
-        .send(error)
+        res.status(400).send(error)
     }
-
 }
 
 module.exports = {
@@ -172,4 +159,3 @@ module.exports = {
     deletePharmacy,
     searchPharmacy,
 }
-
