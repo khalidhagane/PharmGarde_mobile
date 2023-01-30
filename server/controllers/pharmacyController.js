@@ -138,11 +138,7 @@ const deletePharmacy = async (req, res) => {
 
 
 const searchPharmacy = async(req , res , next) =>{
-    const errors = validationResult(req)
-    // await res.send("search done")
-    // console.log(req.params.key);
-    if (!errors.isEmpty())
-            return res.status(400).json({ errors: errors.array() })
+   
     try {
         const data = await Pharmacy.find(
         {
@@ -156,7 +152,6 @@ const searchPharmacy = async(req , res , next) =>{
         return res.status(404)
         .send(`no record matche's ${req.params.key}`)
     
-
         res
         .status(200)
         .send(data)
