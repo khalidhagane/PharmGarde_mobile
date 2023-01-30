@@ -10,13 +10,25 @@ function PharmacyDetails() {
     const getPharmacy = async () => {
         const response = await api.get(`/pharmacy/${id}`)
         setPharmacy(response.data)
-        console.log(response.data)
         setLoading(false)
     }
 
     useEffect(() => {
         getPharmacy()
     }, [])
+
+    // read image from pharmacy state and display it using blob
+    const readImage = () => {
+        if (!pharmacy.pharmacy.image) {
+            return
+        }
+        const binaryData = new Uint8Array(pharmacy.pharmacy.image.data.data)
+        const blob = new Blob([binaryData], {
+            type: pharmacy.pharmacy.image.contentType,
+        })
+        const url = URL.createObjectURL(blob)
+        return url
+    }
 
     if (loading) {
         return <div>Loading...</div>
@@ -34,7 +46,7 @@ function PharmacyDetails() {
                         >
                             <img
                                 className="rounded-t-lg"
-                                src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
+                                src={readImage()}
                                 alt=""
                             />
                         </a>

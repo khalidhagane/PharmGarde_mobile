@@ -22,6 +22,11 @@ function Pharmacy() {
 
     return (
         <>
+            <Link to="/Pharmacy/create">
+                <button className="bg-[#00337C] hover:bg-[#0081C9] text-white font-bold py-2 px-4 rounded">
+                    Add Pharmacy
+                </button>
+            </Link>
             <div class="overflow-x-auto border rounded  border-[#0081C9]">
                 <table class="min-w-full divide-y-2 text-sm rounded border-[#0081C9]">
                     <thead>
