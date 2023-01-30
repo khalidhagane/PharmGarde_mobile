@@ -1,16 +1,32 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import api from "../helpers/api"
+import { useParams } from "react-router-dom"
 
-function CreatePharmacy() {
+function UpdatePharmacy() {
     const [payload, setPayload] = useState({})
     const [succ, setSucc] = useState()
     const [err, setErr] = useState()
+
+    const { id } = useParams()
+
+    const getPharmacy = async () => {
+        try {
+            const response = await api.get(`/pharmacy/${id}`)
+            setPayload(response.data.pharmacy)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getPharmacy()
+    }, [])
 
     const handleChange = (e) => {
         if (e.target.name === "image") {
             setPayload({
                 ...payload,
-                [e.target.name]: e.target.files[0],
+                image: e.target.files[0],
             })
         } else {
             setPayload({
@@ -29,7 +45,7 @@ function CreatePharmacy() {
                 formData.append(key, payload[key])
             }
 
-            const response = await api.post("/pharmacy", formData)
+            const response = await api.put(`/pharmacy/${id}`, formData)
 
             setSucc(response.data.message)
             console.log(response.data)
@@ -49,7 +65,7 @@ function CreatePharmacy() {
                     method="POST"
                 >
                     <h1 className="text-white text-2xl font-medium mb-2 text-center">
-                        Create Pharmacy
+                        Update Pharmacy
                     </h1>
                     <p className="text-green-500 text-sm text-center">{succ}</p>
                     <p className="text-red-500 text-sm text-center"> {err} </p>
@@ -61,6 +77,7 @@ function CreatePharmacy() {
                             placeholder="ikhan"
                             name="name"
                             onChange={handleChange}
+                            value={payload.name}
                         />
                     </div>
 
@@ -72,6 +89,7 @@ function CreatePharmacy() {
                             placeholder="some place"
                             name="address"
                             onChange={handleChange}
+                            value={payload.address}
                         />
                     </div>
 
@@ -83,6 +101,7 @@ function CreatePharmacy() {
                             placeholder="+75256725622"
                             name="phoneNumber"
                             onChange={handleChange}
+                            value={payload.phoneNumber}
                         />
                     </div>
 
@@ -94,6 +113,7 @@ function CreatePharmacy() {
                             placeholder="10:00"
                             name="startTime"
                             onChange={handleChange}
+                            value={payload.startTime}
                         />
                     </div>
 
@@ -105,6 +125,7 @@ function CreatePharmacy() {
                             placeholder="22:00"
                             name="endTime"
                             onChange={handleChange}
+                            value={payload.endTime}
                         />
                     </div>
 
@@ -131,4 +152,4 @@ function CreatePharmacy() {
     )
 }
 
-export default CreatePharmacy
+export default UpdatePharmacy

@@ -8,6 +8,7 @@ import Settings from "./components/Settings"
 import Pharmacy from "./components/Pharmacy"
 import PharmacyDetails from "./pages/PharmacyDetails"
 import CreatePharmacy from "./pages/CreatePharmacy"
+import UpdatePharmacy from "./pages/UpdatePharmacy"
 
 function App() {
     return (
@@ -21,6 +22,10 @@ function App() {
                     <Route
                         path="Pharmacy/create"
                         element={<CreatePharmacy />}
+                    />
+                    <Route
+                        path="Pharmacy/edit/:id"
+                        element={<UpdatePharmacy />}
                     />
                     <Route path="/Comments" element={<Comments />} />
                     <Route path="/Settings" element={<Settings />} />
