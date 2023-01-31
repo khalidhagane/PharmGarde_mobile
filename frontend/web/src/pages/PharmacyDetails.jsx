@@ -3,6 +3,7 @@ import api from "../helpers/api"
 import { useParams } from "react-router-dom"
 import { Link , useNavigate } from "react-router-dom"
 import './stylePharmacyCommentsAndReviews.css'
+import Rating from '@mui/material/Rating';
 
 
 
@@ -24,16 +25,27 @@ function PharmacyDetails() {
 
     const getComments = async () => {
         const response = await api.get(`/comment/${id}`)
-        console.log(response.data);
         setComments(response.data)
         setLoadingComments(false)
     }
 
-   
+
+    const [reviews , setReviews] = useState()
+
+
+   const getReviews = async () => {
+        try {
+            const reviews = await api.get(`/review/${id}`)
+            setReviews(reviews.data[0].averageRating)
+        } catch (error) {
+            console.log(error);
+        }
+   }
 
     useEffect(() => {
         getPharmacy()
         getComments()
+        getReviews()
     }, [])
 
     // read image from pharmacy state and display it using blob
@@ -81,6 +93,9 @@ function PharmacyDetails() {
 
     return (
         <>
+        <div className="my-2 bg-white p-4">
+        <Rating name="disabled" value={reviews} disabled />
+        </div>
             <div className="flex justify-between">
                 <div className="flex justify-center">
                     <div className="rounded-lg shadow-lg bg-white max-w-sm">
