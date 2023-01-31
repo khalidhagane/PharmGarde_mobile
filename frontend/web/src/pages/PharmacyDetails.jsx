@@ -60,6 +60,18 @@ function PharmacyDetails() {
         }
     }
 
+    async function deleteComments(id){
+        try {
+            const res = await api.delete(`/comment/${id}`).then((res) => {
+                let comm = comments.filter((com) => com._id !== id)
+                setComments(comm)
+            })
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     if (loading) {
         return <div>Loading...</div>
     }
@@ -139,7 +151,7 @@ function PharmacyDetails() {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center lg:flex-col">
                 {comments.map((comment,i) =>
 <article className="flex content my-5 rounded-lg bg-white transition hover:shadow-xl">
   <div className="flex flex-1 flex-col lg:flex-row center">
@@ -149,11 +161,12 @@ function PharmacyDetails() {
         {comment.comment}
       </p>
     </div>
-    <Link to="/test" className="mr-4">
+    <button onClick={() => deleteComments(comment._id)} to="/test" className="mr-4">
+        {console.log(comment._id)}
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.5 15.5L15.5 8.5M15.5 15.5L8.5 8.5M14.9 2H9.1C8.42 2 7.46 2.4 6.98 2.88L2.88 6.98C2.4 7.46 2 8.42 2 9.1V14.9C2 15.58 2.4 16.54 2.88 17.02L6.98 21.12C7.46 21.6 8.42 22 9.1 22H14.9C15.58 22 16.54 21.6 17.02 21.12L21.12 17.02C21.6 16.54 22 15.58 22 14.9V9.1C22 8.42 21.6 7.46 21.12 6.98L17.02 2.88C16.54 2.4 15.58 2 14.9 2Z" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-</Link>
+</button>   
   </div>
 </article>
     )}
