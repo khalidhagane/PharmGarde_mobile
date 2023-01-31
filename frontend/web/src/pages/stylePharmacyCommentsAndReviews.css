@@ -2,3 +2,11 @@
     width: 900px;
     height: max-content
 }
+.image {
+    width: 60px;
+    height: 60px;
+    }
+.center {
+    align-items: center;
+    justify-content: space-between;
+}
