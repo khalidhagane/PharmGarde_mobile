@@ -4,7 +4,7 @@ import CustomeButton from "../components/CustomeButton"
 import CustomeText from "../components/CustomeText"
 import styles from "../assets/styles/startContaner"
 
-const PageOne = () => {
+const PageOne = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View>
@@ -27,7 +27,11 @@ const PageOne = () => {
                         marginTop: 30,
                     }}
                 >
-                    <CustomeButton title="Next" />
+                    <CustomeButton
+                        title="Next"
+                        route="PageTwo"
+                        navigation={navigation}
+                    />
                 </View>
             </View>
         </View>

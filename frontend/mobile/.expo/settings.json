@@ -5,5 +5,6 @@
   "minify": false,
   "urlRandomness": "78-fcu",
   "https": false,
-  "scheme": null
+  "scheme": null,
+  "devClient": false
 }

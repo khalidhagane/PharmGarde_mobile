@@ -2,12 +2,15 @@ import React from "react"
 import { StyleSheet, TouchableOpacity, Text } from "react-native"
 
 const CustomeButton = (props) => {
-    const clickMe = () => {
-        console.warn("Next Button")
+    const navigate = () => {
+        // console.log(props.navigation)
+        if (props.route !== "PageFive") {
+            props.navigation.navigate(props.route)
+        }
     }
 
     return (
-        <TouchableOpacity onPress={clickMe} style={styles.btn}>
+        <TouchableOpacity onPress={navigate} style={styles.btn}>
             <Text style={styles.title}>{props.title}</Text>
         </TouchableOpacity>
     )

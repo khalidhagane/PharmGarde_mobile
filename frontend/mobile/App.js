@@ -1,10 +1,4 @@
-import { View } from "react-native"
-import PageFour from "./screens/PageFour"
-
+import AppNavigator from "./AppNavigator"
 export default function App() {
-    return (
-        <View>
-            <PageFour />
-        </View>
-    )
+    return <AppNavigator />
 }
