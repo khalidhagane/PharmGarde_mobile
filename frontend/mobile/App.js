@@ -1,20 +1,10 @@
-import { Button, StyleSheet, Text, TextInput, View } from "react-native"
-import { useState } from "react"
+import { View } from "react-native"
+import PageFour from "./screens/PageFour"
 
 export default function App() {
     return (
-        <View style={styles.screen}>
-            <View>
-                <Text>Reat native app!!</Text>
-            </View>
+        <View>
+            <PageFour />
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    screen: {
-        paddingTop: 70,
-        paddingLeft: 20,
-        paddingRight: 20,
-    },
-})
