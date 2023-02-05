@@ -4,7 +4,7 @@ import CustomeButton from "../components/CustomeButton"
 import CustomeText from "../components/CustomeText"
 import styles from "../assets/styles/startContaner"
 
-const PageFour = () => {
+const PageFour = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View>
@@ -21,8 +21,16 @@ const PageFour = () => {
                     Quisque viverra ex "
                 />
                 <View style={stylesBtn.btns}>
-                    <CustomeButton title="Skip" />
-                    <CustomeButton title="Activate" />
+                    <CustomeButton
+                        title="Skip"
+                        route="PageFive"
+                        navigation={navigation}
+                    />
+                    <CustomeButton
+                        title="Activate"
+                        route="PageFive"
+                        navigation={navigation}
+                    />
                 </View>
             </View>
         </View>
