@@ -34,7 +34,7 @@ const PageFour = ({ navigation }) => {
                 >
                     <CustomeButton
                         title="Finish"
-                        route="PageFive"
+                        route="Map"
                         navigation={navigation}
                     />
                 </View>
