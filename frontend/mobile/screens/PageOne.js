@@ -1,10 +1,15 @@
-import React from "react"
+import { useContext } from "react"
 import { View, Image } from "react-native"
 import CustomeButton from "../components/CustomeButton"
 import CustomeText from "../components/CustomeText"
 import styles from "../assets/styles/startContaner"
+import { DataContext } from "../context/DataContext"
 
 const PageOne = ({ navigation }) => {
+    const { data } = useContext(DataContext)
+
+    console.log(data)
+
     return (
         <View style={styles.container}>
             <View>

@@ -1,10 +1,15 @@
 import React from "react"
-import { View, Image, StyleSheet } from "react-native"
+import { View, Image } from "react-native"
 import CustomeButton from "../components/CustomeButton"
 import CustomeText from "../components/CustomeText"
 import styles from "../assets/styles/startContaner"
+import useLocationPermission from "../hooks/useLocationPermission"
 
 const PageFour = ({ navigation }) => {
+    const location = useLocationPermission()
+
+    console.log(location)
+
     return (
         <View style={styles.container}>
             <View>
@@ -20,14 +25,15 @@ const PageFour = ({ navigation }) => {
                     fermentum odio ne vulputate fringilla.
                     Quisque viverra ex "
                 />
-                <View style={stylesBtn.btns}>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        justifyContent: "space-around",
+                        marginTop: 30,
+                    }}
+                >
                     <CustomeButton
-                        title="Skip"
-                        route="PageFive"
-                        navigation={navigation}
-                    />
-                    <CustomeButton
-                        title="Activate"
+                        title="Finish"
                         route="PageFive"
                         navigation={navigation}
                     />
@@ -36,13 +42,5 @@ const PageFour = ({ navigation }) => {
         </View>
     )
 }
-
-const stylesBtn = StyleSheet.create({
-    btns: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginTop: 30,
-    },
-})
 
 export default PageFour
