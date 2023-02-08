@@ -5,6 +5,7 @@ import PageOne from "./screens/PageOne"
 import PageTwo from "./screens/PageTwo"
 import PageThree from "./screens/PageThree"
 import PageFour from "./screens/PageFour"
+import PharmacieDetails from "./screens/PharmacieDetails"
 
 const stack = createNativeStackNavigator()
 
@@ -12,7 +13,7 @@ export default function AppNavigator() {
     return (
         <NavigationContainer>
             <stack.Navigator
-                initialRouteName="PageOne"
+                initialRouteName="pharmacieDetails"
                 screenOptions={{
                     headerShown: false,
                     animationTypeForReplace: "push",
@@ -20,6 +21,7 @@ export default function AppNavigator() {
                     gestureEnabled: true,
                 }}
             >
+                <stack.Screen name="pharmacieDetails" component={PharmacieDetails} />
                 <stack.Screen name="PageOne" component={PageOne} />
                 <stack.Screen name="PageTwo" component={PageTwo} />
                 <stack.Screen name="PageThree" component={PageThree} />
