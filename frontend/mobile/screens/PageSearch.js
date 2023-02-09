@@ -7,16 +7,16 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Feather from 'react-native-vector-icons/Feather'
 import styles from "../assets/styles/startContaner"
 
-const HomeScreen = () => {
+const PageSearch = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [data, setdata] = React.useState('');
     const onChangeSearch = query => setSearchQuery(query);
-    // console.log(searchQuery);
+    console.log(searchQuery);
 
     const searchPharm = async () => {
         let key =  searchQuery.toLowerCase();
         await  axios.get(`http://172.16.10.97:5000/api/pharmacy/search/${key}`).then((response) => {
-        // console.log("rest",response.data);
+        console.log("rest",response.data);
         setdata(response.data);
     }).catch((err) => {
         console.log(err)
@@ -41,18 +41,16 @@ const HomeScreen = () => {
         {data && data.map((item)=>
                 <View style={styles.cardContainer}  >
                   <Text style={styles.cardTitle}>{item.name}</Text>
-                  
-                  <Text style={styles.cardaddress}><AntDesign name="enviromento" size={17} color="#335E90" /> {item.phoneNumber} </Text>
+                  <Text style={styles.cardaddress}><Feather name="phone" size={17} color="#335E90" /> {item.phoneNumber} </Text>
                   <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                    <Feather name="phone" size={17} color="#335E90" />
+                  <AntDesign name="enviromento" size={17} color="#335E90" />
                     <Text style={styles.cardPhone}> {item.address}</Text>
                   </View>
                 </View>)}  
               </ScrollView> 
-                  
               </View>
     );
     
 }
 
-export default HomeScreen;
+export default PageSearch;

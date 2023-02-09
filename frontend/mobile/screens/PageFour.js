@@ -28,7 +28,7 @@ const PageFour = ({ navigation }) => {
                     />
                     <CustomeButton
                         title="Activate"
-                        route="HomeScreen"
+                        route="PageSearch"
                         navigation={navigation}
                     />
                     

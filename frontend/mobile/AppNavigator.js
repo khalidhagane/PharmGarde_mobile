@@ -5,7 +5,7 @@ import PageOne from "./screens/PageOne"
 import PageTwo from "./screens/PageTwo"
 import PageThree from "./screens/PageThree"
 import PageFour from "./screens/PageFour"
-import HomeScreen from "./screens/HomeScreen"
+import PageSearch from "./screens/PageSearch"
 
 
 
@@ -27,7 +27,7 @@ export default function AppNavigator() {
                 <stack.Screen name="PageTwo" component={PageTwo} />
                 <stack.Screen name="PageThree" component={PageThree} />
                 <stack.Screen name="PageFour" component={PageFour} />
-                <stack.Screen name="HomeScreen" component={HomeScreen} />
+                <stack.Screen name="PageSearch" component={PageSearch} />
 
             </stack.Navigator>
         </NavigationContainer>
