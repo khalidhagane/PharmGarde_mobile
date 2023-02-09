@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         height: "100%",
         paddingTop: 50,
         paddingHorizontal: 20,
-        marginTop: 35,
+        marginTop: 0,
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",

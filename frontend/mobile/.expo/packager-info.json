@@ -1,9 +1,9 @@
 {
   "expoServerPort": null,
-  "packagerPort": 19000,
-  "expoServerNgrokUrl": "https://78-fcu.anonymous.mobile.exp.direct",
-  "packagerNgrokUrl": "https://78-fcu.anonymous.mobile.exp.direct",
-  "ngrokPid": 862688,
+  "packagerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "packagerPid": null,
   "webpackServerPort": null
 }
