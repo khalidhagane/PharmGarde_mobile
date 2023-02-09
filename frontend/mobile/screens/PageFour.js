@@ -28,9 +28,10 @@ const PageFour = ({ navigation }) => {
                     />
                     <CustomeButton
                         title="Activate"
-                        route="PageFive"
+                        route="HomeScreen"
                         navigation={navigation}
                     />
+                    
                 </View>
             </View>
         </View>
