@@ -4,6 +4,9 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_API_KEY } from "../enviroments"
 import { useState } from "react"
 import MapViewDirections from "react-native-maps-directions"
+import BottomNavigation from "./BottomNavigation"
+
+
 
 const { width, height } = Dimensions.get("window")
 
@@ -16,7 +19,9 @@ const INITIAL_POSITION = {
     longitudeDelta: 0.0922 * ASPECT_RATIO,
 }
 
-function Map() {
+
+
+function Map({navigation}) {
     const [markers, setMarkers] = useState([
         {
             coordinate: {
@@ -114,6 +119,7 @@ function Map() {
                     }}
                 />
             </View>
+            <BottomNavigation navigation={navigation} />
         </View>
     )
 }
@@ -125,7 +131,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: "100%",
-        height: "100%",
+        height: "91%",
     },
 })
 

@@ -8,6 +8,8 @@ import PageFour from "./screens/PageFour"
 import Map from "./screens/Map"
 import { DataProvider } from "./context/DataContext"
 import PageSearch from "./screens/PageSearch"
+import Favoris from "./screens/Favoris"
+import Settings from "./screens/Settings"
 
 const stack = createNativeStackNavigator()
 
@@ -30,6 +32,8 @@ export default function AppNavigator() {
                     <stack.Screen name="PageFour" component={PageFour} />
                     <stack.Screen name="Map" component={Map} />
                     <stack.Screen name="PageSearch" component={PageSearch} />
+                    <stack.Screen name="Favoris" component={Favoris} />
+                    <stack.Screen name="Settings" component={Settings} />
                 </stack.Navigator>
             </NavigationContainer>
         </DataProvider>

@@ -1,9 +1,10 @@
 import { useContext } from "react"
-import { View, Image } from "react-native"
+import { View, Image , Text, Pressable } from "react-native"
 import CustomeButton from "../components/CustomeButton"
 import CustomeText from "../components/CustomeText"
 import styles from "../assets/styles/startContaner"
 import { DataContext } from "../context/DataContext"
+import BottomNavigation from "./BottomNavigation"
 
 const PageOne = ({ navigation }) => {
     const { data } = useContext(DataContext)
@@ -11,6 +12,7 @@ const PageOne = ({ navigation }) => {
     console.log(data)
 
     return (
+        <>
         <View style={styles.container}>
             <View>
                 <Image
@@ -40,7 +42,9 @@ const PageOne = ({ navigation }) => {
                 </View>
             </View>
         </View>
+        </>
     )
 }
+
 
 export default PageOne
