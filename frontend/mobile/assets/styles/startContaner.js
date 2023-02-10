@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   cardPhone: {
     fontSize: 17,
     marginLeft: 5,
-  },
+  }
+  
 })
 
 export default styles
