@@ -2,8 +2,10 @@ import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
 import { StyleSheet, View, Dimensions } from "react-native"
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"
 import { GOOGLE_API_KEY } from "../enviroments"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import MapViewDirections from "react-native-maps-directions"
+import api from "../helpers/api"
+import Geocoder from "react-native-geocoding"
 
 const { width, height } = Dimensions.get("window")
 
@@ -16,7 +18,8 @@ const INITIAL_POSITION = {
     longitudeDelta: 0.0922 * ASPECT_RATIO,
 }
 
-function Map() {
+function Map({ navigation }) {
+    const [places, setPlaces] = useState([])
     const [markers, setMarkers] = useState([
         {
             coordinate: {
@@ -28,32 +31,65 @@ function Map() {
         },
     ])
 
-    const [destinations, setDestinations] = useState([
-        {
-            coordinate: {
-                latitude: 32.24976932967926,
-                longitude: -8.52247482214889,
-            },
-            title: "Pharmacy Number One",
-            description: "Some description",
-        },
-        {
-            coordinate: {
-                latitude: 32.241035636345316,
-                longitude: -8.530477514312357,
-            },
-            title: "Pharmacy Number Two",
-            description: "Some other description",
-        },
-        {
-            coordinate: {
-                latitude: 32.250159497853595,
-                longitude: -8.525736388286129,
-            },
-            title: "Pharmacy Number Three",
-            description: "Some other description",
-        },
-    ])
+    const getPharmacies = async () => {
+        try {
+            const response = await api.get("/pharmacy")
+            setPlaces(response.data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const [destinations, setDestinations] = useState([])
+
+    const getAddressLatAndLong = () => {
+        Geocoder.init(GOOGLE_API_KEY)
+        if (places.length > 0) {
+            places.map(async (place) => {
+                try {
+                    const response = await Geocoder.from(place.address)
+
+                    const { lat, lng } = response.results[0].geometry.location
+
+                    setDestinations([
+                        ...destinations,
+                        {
+                            coordinate: {
+                                latitude: lat,
+                                longitude: lng,
+                            },
+                            _id: place._id,
+                            name: place.name,
+                            address: place.address,
+                            phoneNumber: place.phoneNumber,
+                            startTime: place.startTime,
+                            endTime: place.endTime,
+                            image: place.image,
+                        },
+                    ])
+                } catch (error) {
+                    console.error(error)
+                }
+            })
+        }
+    }
+
+    const onPressDestination = (destination) => {
+        // redirect to pharmacieDetails screen
+        navigation.navigate("PharmacyDetails", {
+            destination,
+            title: "Pharmacy Details",
+        })
+    }
+
+    useEffect(() => {
+        getPharmacies()
+        getAddressLatAndLong()
+    }, [])
+
+    console.log(destinations)
+    console.log(places)
+
     return (
         <View style={styles.container}>
             <MapView
@@ -77,6 +113,7 @@ function Map() {
                             title={destination.title}
                             description={destination.description}
                             pinColor="green"
+                            onPress={() => onPressDestination(destination)}
                         />
                         <MapViewDirections
                             origin={markers[0].coordinate}
@@ -121,7 +158,7 @@ function Map() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 0,
+        marginTop: 30,
     },
     map: {
         width: "100%",

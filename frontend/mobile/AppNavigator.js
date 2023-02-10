@@ -1,4 +1,3 @@
-import React from "react"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { NavigationContainer } from "@react-navigation/native"
 import PageOne from "./screens/PageOne"
@@ -31,7 +30,10 @@ export default function AppNavigator() {
                     <stack.Screen name="PageFour" component={PageFour} />
                     <stack.Screen name="Map" component={Map} />
                     <stack.Screen name="PageSearch" component={PageSearch} />
-                    <stack.Screen name="PharmacyDetails" component={PharmacieDetails} />
+                    <stack.Screen
+                        name="PharmacyDetails"
+                        component={PharmacieDetails}
+                    />
                 </stack.Navigator>
             </NavigationContainer>
         </DataProvider>
