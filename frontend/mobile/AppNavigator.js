@@ -11,7 +11,6 @@ import Favoris from "./screens/Favoris"
 import Settings from "./screens/Settings"
 import PharmacieDetails from "./screens/PharmacieDetails"
 
-
 const stack = createNativeStackNavigator()
 
 export default function AppNavigator() {
@@ -35,7 +34,6 @@ export default function AppNavigator() {
                     <stack.Screen name="PageSearch" component={PageSearch} />
                     <stack.Screen name="Favoris" component={Favoris} />
                     <stack.Screen name="Settings" component={Settings} />
-                    <stack.Screen name="PharmacyDetails" component={PharmacieDetails} />
                     <stack.Screen
                         name="PharmacyDetails"
                         component={PharmacieDetails}
